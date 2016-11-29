@@ -1,0 +1,82 @@
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("modul.postAjaxSave('update');", 'Сохранить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить') .
+	                   cmfAdminView::buttonType2($main_edit->getCatalogUrl(), 'Вернуться')) ?>
+
+
+
+<?=$main_edit->htmlStartForm() ?>
+<table class="great_table">
+<tr class="header_col">
+<td colspan="2"><?=$main_edit->viewSiteUrl() ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">&nbsp;</td>
+<td class="svet_td2 selectCheckbox">
+    <?=$form->label('visible', 'Отображать') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">Каталог:</td>
+<td class="svet_td2"><?=$form->html('parent', 'class="width50" onchange="cmf.pages.parentShange();"') ?>
+<script language="JavaScript">
+cmf.pages.parentShange = function() {
+	var value = parseInt(cmf.getValue('<?=$form->getId('parent') ?>'));
+	$('.parentSection').each(function() {
+		cmf.admin.hideShowLine(this, value);
+	});
+};
+cmf.pages.parentShange();
+</script>
+</td>
+</tr>
+
+<tr>
+<td class="svet_td parentSection">Тип страницы:</td>
+<td class="svet_td2 parentSection selectCheckbox width200"><?=$form->html('view') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td parentSection">Тип меню:</td>
+<td class="svet_td2 parentSection selectCheckbox width200"><?=$form->html('viewMenu') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">Адрес:</td>
+<td class="svet_td2"><?=$form->html('uri', 'class="width25"') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">Заголовок:<?=cmfWysiwyng::typograf($form->getId('name')) ?></td>
+<td class="svet_td2"><?=$form->html('name', 'class="width99"') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">Описание:</td>
+<td class="svet_td2"><?=$form->html('content', 400) ?></td>
+</tr>
+
+<tr class="header_col">
+<td colspan="2">Seo</td>
+</tr>
+<tr>
+<td class="svet_td">title:</td>
+<td class="svet_td2"><?=$form->html('title', 'class="width99" rows="3"') ?></td>
+</tr>
+<tr>
+<td class="svet_td">keywords:</td>
+<td class="svet_td2"><?=$form->html('keywords', 'class="width99" rows="3"') ?></td>
+</tr>
+<tr>
+<td class="svet_td">description:</td>
+<td class="svet_td2"><?=$form->html('description', 'class="width99" rows="3"') ?></td>
+</tr>
+
+</table>
+<?=$main_edit->htmlEndForm() ?>
+
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("modul.postAjaxSave('update');", 'Сохранить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить') .
+	                   cmfAdminView::buttonType2($main_edit->getCatalogUrl(), 'Вернуться')) ?>

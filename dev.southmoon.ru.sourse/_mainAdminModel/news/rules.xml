@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moduls package="Информация">
+	<modul id="news" name="Новости">
+		<menu>
+			<link name="/admin/news/" menu="Новости"></link>
+			<link name="/admin/news/edit/"></link>
+		</menu>
+		<pages>
+			<page name="/admin/news/" preg="/" subpath="list"></page>
+			<page name="/admin/news/edit/"></page>
+		</pages>
+		<rules>
+			<rule id="news">
+				<elements>
+					<element>edit</element>
+					<element>list</element>
+					<element>list/config</element>
+				</elements>
+			</rule>
+		</rules>
+	</modul>
+</moduls>

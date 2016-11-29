@@ -1,0 +1,36 @@
+    <div id="main" class="basket bcont">
+        <div class="l-block item-info">
+            <div class="order-block order-block_view2"><div class="o2"><div class="o3 o3_password">
+               <h1>Рассылка</h1>
+               <?=$contentYes ?>
+               <?=$subscribeYes->startForm() ?>
+                    <div class="bcont  ">
+                        <?=$subscribeYes->formError() ?>
+                        <?=$subscribeYes->getForm()->viewError('email') ?>
+                        <div class="block"><b>E-mail</b><span class="input"><i><?=$subscribeYes->getForm()->html('email') ?></i></span></div>
+                    </div>
+                    <div class="empty"></div>
+                    <input type="image" src="images/save-type2.png" class="reg-btn"   />
+                    <script type="text/javascript">
+                    cmf.getId('<?=$subscribeYes->getForm()->getId('email') ?>').errorView = cmf.main.form.login;
+                    </script>
+                <?=$subscribeYes->endForm() ?>
+
+
+               <div class="empty20px"></div>
+               <?=$contentNo ?>
+               <?=$subscribeNo->startForm() ?>
+                    <div class="bcont  ">
+                        <?=$subscribeNo->formError() ?>
+                        <?=$subscribeNo->getForm()->viewError('email') ?>
+                        <div class="block"><b>E-mail</b><span class="input"><i><?=$subscribeNo->getForm()->html('email') ?></i></span></div>
+                    </div>
+                    <div class="empty"></div>
+                    <input type="image" src="images/save-type2.png" class="reg-btn"   />
+                <script type="text/javascript">
+                cmf.getId('<?=$subscribeNo->getForm()->getId('email') ?>').errorView = cmf.main.form.login;
+                </script>
+                <?=$subscribeNo->endForm() ?>
+            </div></div></div>
+        </div>
+    </div>

@@ -1,0 +1,59 @@
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("modul.postAjax('newLine');", 'Добавить').
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>
+
+
+<?=$main_list->htmlStartForm() ?>
+	<table width="1000px" class="great_table">
+	<tr class="header_col">
+	<td width="22px">#</td>
+	<td></td>
+	<td width="22px">Вид</td>
+	<td width="22px">Удалить</td>
+	</tr>
+
+<?	$i = false;
+	foreach($main_list as $key=>$value){
+		if($key) $main_list->loadForm2();
+		list($form, $data) = $value->main;
+
+		$product = get($_product, $key);
+		$id = $main_list->getIndex();
+
+	 ?>
+	<?=view_list::startTR($main_list) ?>
+	<?=$main_list->getPostMove($data); ?>
+
+	<td valing="top">
+		<table width="100%">
+		<tr><td colspan="2"><?=$main_list->getImageView('main', 'image') ?>
+		</td></tr>
+		<tr>
+		<td width="200px">Раздел: <?=$form->html('section', 'class="width99" onchange="modul.postAjax(\'onchangeSection\', '. $key .' ? '. $key .' : this.keyIndex);"') ?></td>
+		<td>
+			Название: <div id="name<?=$id ?>"><?=get($product, 'name') ?></div>
+			<?=$form->html('name', 'class="width99"') ?></td>
+		</tr>
+		<tr>
+		<td>Товар: <?=$form->html('product', 'class="width99" onchange="modul.postAjax(\'onchangeProduct\', '. $key .' ? '. $key .' : this.keyIndex);"') ?></td>
+		<td>
+			<div id="price<?=$id ?>">Цена: <?=get($product, 'price') ?></div>
+			<div id="image<?=$id ?>" <?=get($product, 'image') ? '' : 'class="cmfHide"'?>>
+				<img src="<?=get($product, 'image') ?>" border="0"></div>
+		</td>
+		</tr>
+		</table>
+	</td>
+
+	<td><?=$form->html('visible') ?></td>
+	<td>
+		<?=$main_list->getHtmlListId(); ?>
+		<?=cmfAdminView::onclickType1("modul.deleteAjax(this, '$key');", 'Удалить') ?></td>
+	</tr>
+<? } ?>
+	</table>
+<?=$main_list->htmlEndForm() ?>
+
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("modul.postAjax('newLine');", 'Добавить').
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>

@@ -1,0 +1,27 @@
+
+    <h1>Вход в личный кабинет</h1>
+	<div class="register-page">
+	<?=$userEnter->startForm() ?>
+	<?=$userEnter->formError() ?>
+            <div class="empty">
+	        <fieldset>
+                <label>Email</label>
+                <?=$form->html('login', 'class="i-text"') ?>
+            </fieldset>
+            <fieldset>
+                <label>Пароль</label>
+                <?=$form->html('password', 'class="i-text noreq"') ?>
+            </fieldset>
+            <br />
+            <fieldset>
+                <a href="<?=$passwordUrl ?>">Восстановить пароль</a>
+                <input type="image" src="images/enter.png" class="reg-btn"   />
+            </fieldset>
+
+    <script type="text/javascript">
+    cmf.getId('<?=$form->getId('login') ?>').errorView = cmf.main.form.login;
+    cmf.getId('<?=$form->getId('password') ?>').errorView = cmf.main.form.login;
+    </script>
+	<?=$userEnter->endForm() ?>
+	</div>
+

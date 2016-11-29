@@ -1,0 +1,123 @@
+
+<table class="great_table">
+<tr class="header_col">
+<td colspan="2"><?=$url ?></td>
+</tr>
+</table>
+
+<div class="imageOne <?=$isMultiImage ? 'cmfHide' : '' ?>">
+    <table class="great_table">
+    <tr class="header_col">
+    <td colspan="2"><a onclick="$('.imageOne').hide(); $('.imageMulti').show(); ">Мультизагрузка</a></td>
+    </tr>
+    </table>
+
+    <? view_command::viewLineMenuButton(
+                       $id ?    cmfAdminView::buttonType1("cmf.redirect('". $main_edit->getCatalogUrl() ."');", 'Новая запись') : '',
+                       cmfAdminView::buttonType1("edit.postAjax('update');", $id ? 'Сохранить' : 'Добавить')) ?>
+
+
+<?=$main_edit->htmlStartForm('edit') ?>
+<table class="great_table">
+
+<tr class="header_col">
+<td colspan="2"><?=($id ? 'Информация' : 'Новая запись') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">&nbsp;</td>
+<td class="svet_td2"><?=$form->label('visible', 'Отображать') ?></td>
+</tr>
+
+<tr>
+<td class="svet_td">Изображение:</td>
+<td class="svet_td2">
+    <?=$form->html('name', 'class="width50"') ?>
+    <br /><br /><?=$main_edit->getImage('main', 'image') ?></td>
+</tr>
+
+<? if($main_edit->getId()) { ?>
+<tr>
+<td class="svet_td"><span id="previewMain" class="cursor">Показать превью</span></td>
+<td class="svet_td2">
+    <div id="previewContent" class="cmfHide">
+        <? view_gallery::preview($main_edit, 'edit', $data) ?>
+    </div>
+<script language="JavaScript">
+cmf.admin.gallery.hideShow('#previewMain', '#previewContent');
+</script>
+</td>
+</tr>
+<? } ?>
+
+</table>
+<?=$main_edit->htmlEndForm() ?>
+</div>
+
+
+<div class="imageMulti <?=$isMultiImage ? '' : 'cmfHide' ?>">
+    <table class="great_table">
+    <tr class="header_col">
+    <td colspan="2"><a onclick="$('.imageMulti').hide(); $('.imageOne').show(); ">Обычная загрузка</a></td>
+    </tr>
+    </table>
+
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("multi.postAjax('newLine');", 'Добавить') .
+	                   cmfAdminView::buttonType1("multi.postAjax('update');", 'Применить')) ?>
+
+
+<?=$main_multi->htmlStartForm('multi') ?>
+	<table class="great_table">
+	<tr class="header_col">
+	<td>Изображение</td>
+	<td width="22px">Вид</td>
+	<td width="22px">Удалить</td>
+	</tr>
+
+<?	foreach($main_multi as $key=>$value){
+		list($form, $data) = $value->main;
+	 ?>
+	<?=view_list::startTR($main_multi) ?>
+	<td><?=$form->html('name', 'class="width99"') ?>
+    <br /><br /><?=$main_multi->getImage('main', 'image') ?></td>
+	<td><?=$form->html('visible') ?></td>
+	<td><?=$main_multi->viewDelete() ?></td>
+	</tr>
+<? } ?>
+	</table>
+<?=$main_multi->htmlEndForm() ?>
+
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType1("multi.postAjax('newLine');", 'Добавить') .
+	                   cmfAdminView::buttonType1("multi.postAjax('update');", 'Применить')) ?>
+</div>
+
+	<? view_command::viewLimitButton($limitUrl, $linkPage, '') ?>
+
+<?=$main_list->htmlStartForm() ?>
+<?	foreach($main_list as $key=>$value) if($key){
+		list($form, $data) = $value->main;
+
+	 ?>
+    <div id="<?=$main_list->getHtmlIdDel() ?>" class="galleryView productImageWidth">
+	<div>
+        <div class="empty"></div>
+    	<div><?=$main_list->getPostMove($data) ?></div>
+    	<div><?=cmfAdminView::buttonType3($main_list->getEditUrl(), $data->header) ?></div>
+	    <div style="float:right">
+    	    <div><?=$form->html('visible', 'onchange="modul.postAjax(\'update\');"') ?></div>
+    	    <div><?=$main_list->viewDelete() ?></div>
+    	</div>
+	</div>
+	<div class="empty"></div>
+	<div>
+	    <? if($data->get('image_main')) { ?>
+	        <a href="<?=$data->get('image_main') ?>" class="fancybox img" rel="group"><img class="preview" id="preview<?=$key ?>" src="<?=$data->get('image_main') ?>?<?=time() ?>" alt="<?=htmlspecialchars($data->get('name')) ?>"></a>
+	    <? }?>
+    </div>
+	</div>
+<? } ?>
+<?=$main_list->htmlEndForm() ?>
+
+	<? view_command::viewLimitButton($limitUrl, $linkPage, '') ?>

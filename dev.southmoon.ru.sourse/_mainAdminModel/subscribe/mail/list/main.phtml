@@ -1,0 +1,54 @@
+
+<?=$main_list->htmlStartForm('filter') ?>
+<table class="great_table">
+<tr class="header_col">
+<td>
+    Email: <input name="email" id="email" type="text" value="<?=cmfString::specialchars(urldecode($main_list->getFilter('email'))) ?>" size="20">
+    <br /><?=cmfAdminView::onclickType1("filter.postAjax('changeFilter');", 'Найти') ?>&nbsp;&nbsp;
+	<?=cmfAdminView::onclickType1("cmf.setValue('email', ''); filter.postAjax('changeFilter');", 'Сброс') ?>
+</td>
+</tr>
+</table>
+<?=$main_list->htmlEndForm() ?>
+
+    <table class="table_position">
+    <tr class="header_col">
+    <td>Разделы: <?=cmfView::selectOncahge($filterType, 'class="width99"') ?></td>
+    </tr>
+	</table>
+
+	<? view_command::viewLimitButton($limitUrl, $linkPage,
+	                   cmfAdminView::buttonType2($main_list->getNewUrl(), 'Добавить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>
+
+
+<?=$main_list->htmlStartForm() ?>
+	<table class="great_table">
+	<tr class="header_col">
+	<td width="200px">Тип рассылки</td>
+	<td width="200px">Пользователь</td>
+	<td>Email</td>
+	<td width="100px">Статус</td>
+	<td width="22px">Рассылка</td>
+	<td width="22px">Уд.</td>
+	</tr>
+
+<?	foreach($main_list as $key=>$value){
+		list($form, $data) = $value->main;
+
+	 ?>
+	<?=view_list::startTR($main_list) ?>
+	<td><?=get2($filterType, $data->type, 'name', 'нет') ?></td>
+	<td><? if(isset($listUser[$data->user])) echo cmfAdminView::buttonType3($main_list->getUserUrl($data->user), $listUser[$data->user]) ?></td>
+	<td><? if($key) echo cmfAdminView::buttonType3($main_list->getEditUrl(), $data->email) ?></td>
+	<td id="status<?=$key ?>"><?=$main_list->getStatus($data->visible) ?></td>
+	<td><?=$form->html('subscribe') ?></td>
+    <td><?=$main_list->viewDelete() ?></tr>
+	</tr>
+<? } ?>
+	</table>
+<?=$main_list->htmlEndForm() ?>
+
+	<? view_command::viewLimitButton($limitUrl, $linkPage,
+	                   cmfAdminView::buttonType2($main_list->getNewUrl(), 'Добавить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>

@@ -1,0 +1,33 @@
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType2($main_list->getNewUrl(), 'Добавить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>
+
+
+<?=$main_list->htmlStartForm() ?>
+	<table class="great_table">
+	<tr class="header_col">
+	<td>Название</td>
+<!--//	<td width="100px">Копировать</td>//-->
+	<td width="100px">Фильтры</td>
+	<td width="100px">Описание</td>
+	<td width="22px">Уд.</td>
+	</tr>
+
+<?	foreach($main_list as $key=>$value){
+		list($form, $data) = $value->main;
+
+	 ?>
+	<?=view_list::startTR($main_list) ?>
+	<td><? if($key) echo cmfAdminView::buttonType3($main_list->getEditUrl(), $data->name) ?></td>
+<!--//	<td><?=cmfAdminView::onclickType1("modul.post('copy', $key)", 'копировать') ?></td>//-->
+	<td><?=cmfAdminView::buttonType3($main_list->getSelectUrl(), 'фильтры') ?></td>
+	<td><?=cmfAdminView::buttonType3($main_list->getNoticeUrl(), 'описание') ?></td>
+	<td><?=$main_list->viewDelete() ?></td>
+	</tr>
+<? } ?>
+	</table>
+<?=$main_list->htmlEndForm() ?>
+
+	<? view_command::viewLineButton(
+	                   cmfAdminView::buttonType2($main_list->getNewUrl(), 'Добавить') .
+	                   cmfAdminView::buttonType1("modul.postAjax('update');", 'Применить')) ?>
