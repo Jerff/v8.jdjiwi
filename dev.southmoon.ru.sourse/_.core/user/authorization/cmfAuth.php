@@ -23,12 +23,12 @@ abstract class cmfAuth {
 	}
 
 
-    // èìÿ ñåññèè
+    // Ð¸Ð¼Ñ ÑÐµÑÑÐ¸Ð¸
 	/*protected function getName() {
 		return $this->name;
 	}*/
 	abstract protected function getName();
-    // óïðàâëåíèå ñåññèé
+    // ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑÐµÑÑÐ¸Ð¹
 	private function setSession($session) {
 		$this->session = $session;
 	}
@@ -36,14 +36,14 @@ abstract class cmfAuth {
 		return $this->session;
 	}
 
-	// îáíîâëåíèå äàííûõ ñåññèè
+	// Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… ÑÐµÑÑÐ¸Ð¸
 	protected function sessionUpdate() {
 	}
-    // óäàëåíèå äàííûõ ñåññèè
+    // ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… ÑÐµÑÑÐ¸Ð¸
 	protected function sessionRemove() {
 	}
 
-    // id ïîëüçîâàòåëÿ
+    // id Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
     public function setId($id) {
 		return $this->session()->setId($id);
 	}
@@ -52,7 +52,7 @@ abstract class cmfAuth {
 	}
 
 
-	// äàííûå ïîëüçîâàòåëÿ
+	// Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 	public function setData($data) {
 		$this->data = $data;
 	}
@@ -70,14 +70,14 @@ abstract class cmfAuth {
 	}
 
 
-	// èñïîëüçóåìûå ïàðàìåòðû ïîëüçîâàòåëÿ
+	// Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 	abstract protected function getFields();
 	abstract public function getFieldsParam();
-    // òàáëèöà äàííûõ
+    // Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð° Ð´Ð°Ð½Ð½Ñ‹Ñ…
 	protected function getDb() {
 		return db_user;
 	}
-	// ôèëüòð â áàçå
+	// Ñ„Ð¸Ð»ÑŒÑ‚Ñ€ Ð² Ð±Ð°Ð·Ðµ
 	protected function getWhere() {
 		return array(1);
 	}
@@ -117,11 +117,11 @@ abstract class cmfAuth {
 	}
 
 
-    // õåø ïàðîëÿ
+    // Ñ…ÐµÑˆ Ð¿Ð°Ñ€Ð¾Ð»Ñ
 	static public function hash($password) {
         return sha1($password . cmfSalt);
 	}
-    // àâòîðèçàöèÿ
+    // Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ
 	public function select($login, $password){
 		$password = self::hash($password);
 		$row = cmfRegister::getSql()->placeholder("SELECT `isIp`, ?fields FROM ?t WHERE ?w AND `login`=? AND `password`=? AND visible='yes' AND register='yes' AND UNIX_TIMESTAMP(banDate)<?", $this->getFields(), $this->getDb(), $this->getWhere(), $login, $password, time())
@@ -140,7 +140,7 @@ abstract class cmfAuth {
 	}
 
 
-	// ÷òåíèå äîïîëíèòåëüíûõ äàííûõ
+	// Ñ‡Ñ‚ÐµÐ½Ð¸Ðµ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð´Ð°Ð½Ð½Ñ‹Ñ…
 	protected function getParam() {
 	    $row = cmfRegister::getSql()->placeholder("SELECT data, ?fields FROM ?t WHERE id=?", $this->getFieldsParam(), db_user_data, $this->getId())
 										->fetchAssoc();
@@ -156,14 +156,14 @@ abstract class cmfAuth {
 	}
 
 
-    // ðàçëîãèâàíèå
+    // Ñ€Ð°Ð·Ð»Ð¾Ð³Ð¸Ð²Ð°Ð½Ð¸Ðµ
 	public function logOut(){
 		$this->session()->logOut();
 		$this->sessionRemove();
 	}
 
 
-    // îãðàíè÷åíèå îøèáîê ëîãèíà-ïàðîëÿ
+    // Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ðµ Ð¾ÑˆÐ¸Ð±Ð¾Ðº Ð»Ð¾Ð³Ð¸Ð½Ð°-Ð¿Ð°Ñ€Ð¾Ð»Ñ
 	protected function setError($login) {
 		$sql = cmfRegister::getSql();
 		$row = $sql->placeholder("SELECT `banCount` FROM ?t WHERE `login`=? AND visible='yes' AND register='yes' AND UNIX_TIMESTAMP(banDate)<?", $this->getDb(), $login, time())

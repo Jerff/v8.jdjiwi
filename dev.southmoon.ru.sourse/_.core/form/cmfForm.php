@@ -43,7 +43,7 @@ class cmfForm implements Iterator {
 		$this->setOption('name', $name);
 		$this->setOption('method', get($o, 'method', 'post'));
 		$this->setOption('color', get($o, 'color', '#FCD081'));
-		$this->setOption('color', get($o, 'security'));
+//		$this->setOption('color', get($o, 'security'));
 
 		$p = array();
 		if(isset($o['uploadFile'])) $p[] = 'enctype="multipart/form-data"';

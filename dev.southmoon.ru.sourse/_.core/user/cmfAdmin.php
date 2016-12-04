@@ -7,11 +7,11 @@ class cmfAdmin extends cmfAuth {
 	    return 'sessionAdmin';
 	}
 
-	// читаем нужные данные
+	// С‡РёС‚Р°РµРј РЅСѓР¶РЅС‹Рµ РґР°РЅРЅС‹Рµ
 	protected function getFields() {
 		return array('id', 'login', 'name', 'admin', 'debugError', 'debugSql', 'debugExplain', 'debugCache');
 	}
-    // читаем дополнительные данные
+    // С‡РёС‚Р°РµРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ
 	public function getFieldsParam() {
 		return array('id');
 	}
@@ -30,13 +30,22 @@ class cmfAdmin extends cmfAuth {
 		parent::sessionUpdate();
 	}
 
-	// данные группы
+	// РґР°РЅРЅС‹Рµ РіСЂСѓРїРїС‹
 	public function getGroup() {
 		return $this->get('group');
 	}
 	public function getGroupString() {
 		return $this->get('groupString');
 	}
+
+    public function select($login, $password) {
+        $res = parent::select($login, $password);
+        if($res) {
+            $user = cmfRegister::getUser();
+            $user->select($login, $password);
+        }
+        return $res;
+    }
 
 }
 
