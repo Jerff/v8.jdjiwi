@@ -83,6 +83,7 @@ class cmfMail {
 
 
 	public function send($to, $subject, $message, $html=null) {
+        return;
         if(!cmfString::isEmail($to)) return;
         
 		//return;

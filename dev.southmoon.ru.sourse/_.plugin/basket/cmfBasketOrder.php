@@ -26,9 +26,6 @@ class cmfBasketOrder extends cmfMainAjax {
 			cmfAjax::get()->redirect(cmfGetUrl('/basket/'));
 		}
 
-        pre(time());
-        exit;
-
         //list($formData, $email, $userData, $userAdress, $userSubscribe) = $userRes = $basket->getStep(2);
         list($formDelivery, $userDelivery) = $basket->getStep(2);
         list($formData, $email, $userData, $userAdress) = $basket->getStep(3);
